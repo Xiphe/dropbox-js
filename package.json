@@ -51,7 +51,7 @@
     "test": "test"
   },
   "scripts": {
-    "prepublish": "node node_modules/coffee-script/bin/cake build",
-    "test": "node node_modules/coffee-script/bin/cake test"
+    "prepublish": "cake build",
+    "test": "cake test"
   }
 }
