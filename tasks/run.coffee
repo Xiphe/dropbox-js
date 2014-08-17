@@ -11,7 +11,7 @@ run = (command, options, callback) ->
     command = command.replace(/\//g, '\\')
     cmd = spawn 'cmd', ['/C', command]
   else
-    cmd = spawn '/bin/sh', ['-c', command]
+    cmd = spawn '/bin/sh', ['-c', 'PATH=$PATH:$(npm bin); ' + command]
   _current_cmd = cmd
   cmd.stdout.on 'data', (data) ->
     process.stdout.write data unless options.noOutput

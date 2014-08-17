@@ -19,7 +19,7 @@ buildCode = (callback) ->
 
   # TODO(pwnall): add --map after --compile when CoffeeScript #2779 is fixed
   #               and the .map file isn't useless
-  command = 'node node_modules/coffee-script/bin/coffee --output lib ' +
+  command = 'coffee --output lib ' +
       "--compile --join dropbox.js #{source_files.join(' ')}"
 
   run command, noExit: true, noOutput: true, (exitCode) ->
@@ -31,7 +31,7 @@ buildCode = (callback) ->
     # Compile without --join for decent error messages.
     fs.mkdirSync 'tmp' unless fs.existsSync 'tmp'
     commands = []
-    commands.push 'node node_modules/coffee-script/bin/coffee ' +
+    commands.push 'coffee ' +
         '--output tmp --compile ' + source_files.join(' ')
     async.forEachSeries commands, run, ->
       # run should exit on its own. This is mostly for clarity.
@@ -45,7 +45,7 @@ buildTests = (callback) ->
   for test_dir in test_dirs
     out_dir = test_dir.replace(/^test\/src\//, 'test/js/')
     test_files = glob.sync path.join(test_dir, '*.coffee')
-    commands.push "node node_modules/coffee-script/bin/coffee " +
+    commands.push "coffee " +
                   "--output #{out_dir} --compile #{test_files.join(' ')}"
   async.forEachSeries commands, run, ->
     callback() if callback

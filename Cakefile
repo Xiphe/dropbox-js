@@ -91,8 +91,7 @@ task 'sitedoc', ->
 
 
 task 'extension', ->
-  run 'node node_modules/coffee-script/bin/coffee ' +
-      '--compile test/chrome_extension/*.coffee'
+  run 'coffee --compile test/chrome_extension/*.coffee'
 
 task 'chrome', ->
   vendor ->
